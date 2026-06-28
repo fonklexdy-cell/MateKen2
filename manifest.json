@@ -1,0 +1,17 @@
+{
+  "name": "MateKen2",
+  "short_name": "MateKen2",
+  "description": "Plataforma Educativa de Matemáticas",
+  "start_url": "https://github.io",
+  "display": "standalone",
+  "background_color": "#2563eb",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/4712/4712139.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
