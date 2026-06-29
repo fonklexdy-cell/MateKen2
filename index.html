@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -441,45 +441,23 @@
             document.getElementById('authForm').classList.remove('hidden');
         }
 
-        document.getElementById('authForm').onsubmit = async (e) => {
-  e.preventDefault();
-  
-  const regName = document.getElementById('regName').value;
-  const regEmail = document.getElementById('regEmail').value;
-
-  try {
-    // 1. Enviamos los datos a la función backend que creamos en Cloudflare
-    const response = await fetch('/registro', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-            body: JSON.stringify({ regName, regEmail })
-
-    });
-
-    const resultado = await response.json();
-
-    if (resultado.success) {
-      // 2. Si Cloudflare lo guarda con éxito, iniciamos la sesión local
-      session = { name: regName, email: regEmail, status: 'gratis' };
-      localStorage.setItem('mate_session', JSON.stringify(session));
-      
-      // Ocultamos la ventana de autenticación y refrescamos la interfaz
-      document.getElementById('authOverlay').classList.add('hidden');
-      updateUI();
-      renderJuegos();
-      renderFichas();
-      
-      alert("¡Usuario registrado con éxito en la nube!");
-    } else {
-      alert("Error al registrar: " + resultado.message);
-    }
-  } catch (error) {
-    console.error("Error en la conexión:", error);
-    alert("Hubo un fallo al conectar con el servidor.");
-  }
-};
+        document.getElementById('authForm').onsubmit = (e) => {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            let user = db.find(u => u.email === email);
+            if(!user) {
+                user = { name, email, status: 'gratis', id: Date.now(), fecha_registro: new Date().toISOString() };
+                db.push(user);
+                localStorage.setItem('mate_db', JSON.stringify(db));
+            }
+            session = user;
+            localStorage.setItem('mate_session', JSON.stringify(session));
+            document.getElementById('authOverlay').classList.add('hidden');
+            updateUI();
+            renderJuegos();
+            renderFichas();
+        };
 
         function updateUI() {
             if(!session) return;
