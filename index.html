@@ -16,27 +16,16 @@
             theme: {
                 extend: {
                     colors: {
-                        azul: '#2563eb', 
-                        amarillo: '#facc15', 
-                        verde: '#22c55e', 
-                        naranja: '#f97316', 
-                        rosado: '#ec4899', 
-                        dark: '#0f172a',
-                        premium: '#8b5cf6'
+                        azul: '#2563eb', amarillo: '#facc15', verde: '#22c55e', 
+                        naranja: '#f97316', rosado: '#ec4899', dark: '#0f172a', premium: '#8b5cf6'
                     },
-                    borderRadius: {
-                        '3xl': '1.5rem',
-                        '4xl': '2rem',
-                    },
+                    borderRadius: { '3xl': '1.5rem', '4xl': '2rem' },
                     animation: {
                         'float': 'float 3s ease-in-out infinite',
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-20px)' } }
                     }
                 }
             }
@@ -54,42 +43,11 @@
         iframe { width: 100%; height: 100%; border: none; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .glass-effect { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
-        
         .ficha-card { transition: all 0.3s ease; }
         .ficha-card:hover { transform: scale(1.05); }
-
-        .float-app-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 1000;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .stat-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 12px;
-        }
+        .float-app-btn { position: fixed; bottom: 20px; left: 20px; z-index: 1000; animation: float 3s ease-in-out infinite; }
+        .stat-badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); color: white; padding: 8px 16px; border-radius: 12px; font-weight: bold; font-size: 12px; }
     </style>
-<!-- SISTEMA DE CONTROL DE ANUNCIOS Y PREMIUM -->
-<script>
-    // Verificamos si el usuario ya es Premium en el almacenamiento local
-    const esPremium = localStorage.getItem('usuario_premium') === 'true';
-
-    // Si NO es premium, solo avisamos en consola (Anuncios pausados)
-    if (!esPremium) {
-        console.log("Modo Gratis: Anuncios pausados por el momento.");
-    } else {
-        console.log("¡Modo Premium! Acceso liberado.");
-    }
-</script>
 </head>
 
 <body class="pb-24">
@@ -289,12 +247,12 @@
                             </div>
                             
                             <button onclick="contactWhatsApp('local')" class="w-full premium-gradient text-white font-black py-5 rounded-2xl text-xl shadow-xl uppercase tracking-widest hover:scale-[1.02] transition-transform flex items-center justify-center gap-3 mb-4">
-                                <i class="fab fa-whatsapp text-2xl"></i>
+                                <i class="fab fa-whatsapp text-2xl mr-2"></i>
                                 Activar Premium (Nicaragua)
                             </button>
 
                             <button onclick="contactWhatsApp('international')" class="w-full bg-azul text-white font-black py-5 rounded-2xl text-xl shadow-xl uppercase tracking-widest hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
-                                <i class="fab fa-whatsapp text-2xl"></i>
+                                <i class="fab fa-whatsapp text-2xl mr-2"></i>
                                 Pagar desde el Extranjero
                             </button>
                         </div>
@@ -304,18 +262,16 @@
         </section>
     </main>
 
-    <!-- MODAL QR -->
+    <!-- MODALES -->
     <div id="qrModal" class="fixed inset-0 z-[250] hidden flex items-center justify-center bg-dark/90 backdrop-blur-lg p-6 text-center">
         <div class="bg-white rounded-[3rem] p-8 max-w-sm w-full shadow-2xl relative">
             <button onclick="document.getElementById('qrModal').classList.add('hidden')" class="absolute top-6 right-6 text-gray-300 hover:text-gray-500"><i class="fas fa-times text-xl"></i></button>
-            <h3 class="text-2xl font-black text-dark mb-2">Escanea el Juego</h3>
-            <p class="text-gray-400 font-bold text-xs mb-6 uppercase">MateKen2 QR Share</p>
+            <h3 class="text-2xl font-black text-dark mb-2 uppercase">Escanea el Juego</h3>
             <div id="qrContainer" class="bg-gray-50 p-4 rounded-3xl mb-6 flex justify-center"></div>
             <button onclick="document.getElementById('qrModal').classList.add('hidden')" class="w-full bg-azul text-white font-black py-4 rounded-2xl uppercase tracking-widest">Cerrar</button>
         </div>
     </div>
 
-    <!-- MODAL PREMIUM -->
     <div id="premiumModal" class="fixed inset-0 z-[200] hidden flex items-center justify-center bg-dark/90 backdrop-blur-lg p-6 text-center">
         <div class="bg-white rounded-[3rem] p-10 max-w-sm w-full shadow-2xl border-t-8 border-premium relative overflow-hidden">
             <div class="absolute top-0 right-0 p-4">
@@ -324,11 +280,7 @@
             <div class="text-7xl mb-6 animate-bounce">⭐</div>
             <h3 class="text-3xl font-black text-dark mb-4 tracking-tighter uppercase">¡Contenido Premium!</h3>
             <p class="text-gray-500 font-bold mb-8 leading-relaxed">Has descubierto un tesoro exclusivo. Activa tu cuenta Premium para acceder sin límites a este y todos los recursos.</p>
-            
-            <div class="space-y-3">
-                <button onclick="changeTab('premium'); document.getElementById('premiumModal').classList.add('hidden')" class="w-full premium-gradient text-white font-black py-5 rounded-2xl text-lg shadow-xl uppercase tracking-widest hover:scale-[1.02] transition-transform">Ver Beneficios</button>
-                <button onclick="document.getElementById('premiumModal').classList.add('hidden')" class="w-full bg-gray-100 text-gray-400 font-black py-4 rounded-2xl text-sm uppercase tracking-widest hover:bg-gray-200 transition-colors">Quizás más tarde</button>
-            </div>
+            <button onclick="changeTab('premium'); document.getElementById('premiumModal').classList.add('hidden')" class="w-full premium-gradient text-white font-black py-5 rounded-2xl text-lg shadow-xl uppercase tracking-widest hover:scale-[1.02] transition-transform">Ver Beneficios</button>
         </div>
     </div>
 
@@ -336,48 +288,26 @@
     <div id="adminPanel" class="fixed inset-0 z-[300] hidden bg-gray-100/50 backdrop-blur-xl p-4 sm:p-10 overflow-y-auto">
         <div class="max-w-4xl mx-auto bg-white rounded-[3rem] p-8 sm:p-12 shadow-2xl border-4 border-azul relative">
             <div class="flex justify-between items-center mb-10">
-                <div class="flex items-center gap-4">
-                    <div class="bg-azul text-white w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow-lg">
-                        <i class="fas fa-user-shield"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-3xl font-black text-dark uppercase tracking-tighter">Panel Maestro 🤖</h2>
-                        <div class="flex gap-4 mt-2">
-                            <div class="stat-badge">
-                                <i class="fas fa-users"></i>
-                                <span id="totalUsersCount">0</span> Usuarios
-                            </div>
-                            <div class="stat-badge">
-                                <i class="fas fa-crown"></i>
-                                <span id="premiumUsersCount">0</span> Premium
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="toggleAdmin()" class="bg-red-50 text-red-500 w-12 h-12 rounded-2xl flex items-center justify-center text-xl hover:bg-red-500 hover:text-white transition-all shadow-md">
-                    <i class="fas fa-times"></i>
-                </button>
+                <h2 class="text-3xl font-black text-dark uppercase tracking-tighter">Panel Maestro 🤖</h2>
+                <button onclick="toggleAdmin()" class="bg-red-500 text-white w-10 h-10 rounded-2xl flex items-center justify-center"><i class="fas fa-times"></i></button>
             </div>
-            
-            <div class="bg-gray-50 rounded-3xl overflow-hidden border border-gray-100">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="bg-gray-100 text-gray-400 text-[10px] font-black uppercase tracking-widest">
-                                <th class="p-6">Estudiante</th>
-                                <th class="p-6">Estado</th>
-                                <th class="p-6">Fecha Registro</th>
-                                <th class="p-6 text-right">Gestión</th>
-                            </tr>
-                        </thead>
-                        <tbody id="userTable" class="divide-y divide-gray-100"></tbody>
-                    </table>
-                </div>
+            <div class="bg-gray-50 rounded-3xl overflow-hidden border">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-gray-100 text-gray-400 text-[10px] font-black uppercase tracking-widest border-b">
+                            <th class="p-6">Estudiante</th>
+                            <th class="p-6">Estado</th>
+                            <th class="p-6 text-right">Gestión</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTable" class="divide-y divide-gray-100"></tbody>
+                </table>
             </div>
         </div>
     </div>
 
     <script>
+        // --- BASE DE DATOS Y SESIÓN ---
         let db = JSON.parse(localStorage.getItem('mate_db')) || [];
         let session = JSON.parse(localStorage.getItem('mate_session')) || null;
         let timerId;
@@ -447,23 +377,32 @@
             const email = document.getElementById('regEmail').value;
             let user = db.find(u => u.email === email);
             if(!user) {
-                user = { name, email, status: 'gratis', id: Date.now(), fecha_registro: new Date().toISOString() };
+                user = { name, email, status: 'gratis', id: Date.now() };
                 db.push(user);
                 localStorage.setItem('mate_db', JSON.stringify(db));
             }
             session = user;
             localStorage.setItem('mate_session', JSON.stringify(session));
+            syncPremiumFlag(); // Sincroniza con el flag global
             document.getElementById('authOverlay').classList.add('hidden');
             updateUI();
             renderJuegos();
             renderFichas();
         };
 
+        function syncPremiumFlag() {
+            if (session && session.status === 'premium') {
+                localStorage.setItem('usuario_premium', 'true');
+            } else {
+                localStorage.setItem('usuario_premium', 'false');
+            }
+        }
+
         function updateUI() {
             if(!session) return;
             document.getElementById('navUserName').innerText = session.name;
             document.getElementById('helloName').innerText = session.name;
-            document.getElementById('userStatusTag').innerText = session.status;
+            document.getElementById('userStatusTag').innerText = session.status.toUpperCase();
             
             const badge = document.getElementById('premiumBadge');
             if(session.status === 'premium') {
@@ -483,11 +422,11 @@
                 card.className = `game-card h-48 rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center shadow-lg border-4 border-white ${j.c} relative group`;
                 
                 card.innerHTML = `
-                    <div onclick="launch(juegos[${index}], ${index}, 'juego')" class="flex flex-col items-center cursor-pointer">
+                    <div onclick="launch(${index}, 'juego')" class="flex flex-col items-center cursor-pointer">
                         <div class="text-5xl mb-3 text-white drop-shadow-md group-hover:scale-110 transition-transform">
                             <i class="fas ${j.i}"></i>
                         </div>
-                        <span class="text-white font-black text-sm uppercase tracking-tighter leading-tight drop-shadow-sm">${j.n}</span>
+                        <span class="text-white font-black text-sm uppercase leading-tight drop-shadow-sm">${j.n}</span>
                     </div>
                     
                     <div class="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -503,26 +442,26 @@
             });
         }
 
-        function shareGame(index, type) {
-            if(!session || session.status !== 'premium') {
-                document.getElementById('premiumModal').classList.remove('hidden');
-                return;
-            }
-
-            const game = juegos[index];
-            if(type === 'link') {
-                navigator.clipboard.writeText(game.u).then(() => {
-                    alert("¡Enlace copiado al portapapeles! 🚀");
-                });
-            } else {
-                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(game.u)}`;
-                document.getElementById('qrContainer').innerHTML = `<img src="${qrUrl}" class="w-48 h-48 rounded-2xl shadow-inner">`;
-                document.getElementById('qrModal').classList.remove('hidden');
-            }
+        function renderFichas() {
+            const grid = document.getElementById('gridFichas');
+            grid.innerHTML = fichas.map((f, i) => `
+                <div onclick="launch(${i}, 'ficha')" class="ficha-card bg-white rounded-[2rem] p-6 border-2 border-gray-50 shadow-sm flex items-center gap-4 cursor-pointer relative overflow-hidden group">
+                    <div class="w-16 h-16 bg-gradient-to-br ${f.c} rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg group-hover:rotate-6 transition-transform">
+                        <i class="fas ${f.i}"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-black text-dark uppercase tracking-tight">${f.n}</h4>
+                        <p class="text-xs text-gray-400 font-bold uppercase">Documento PDF</p>
+                    </div>
+                    <div class="text-gray-300 group-hover:text-azul transition-colors">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function launch(item, index, type) {
-            if(!session) return;
+        function launch(index, type) {
+            const item = (type === 'juego') ? juegos[index] : fichas[index];
             const isRestricted = (type === 'juego' && index >= 4) || (type === 'ficha' && index >= 1);
             
             if(isRestricted && session.status === 'gratis') {
@@ -538,7 +477,7 @@
                 
                 timerId = setInterval(() => {
                     timeLeft--;
-                    progress.style.width = (timeLeft * 16.66) + '%';
+                    progress.style.width = (timeLeft * 12.5) + '%';
                     
                     if(timeLeft <= 0) {
                         clearInterval(timerId);
@@ -548,7 +487,7 @@
                     }
                 }, 1000);
             } else {
-                if(type === 'juego') {
+                if(type === 'juego' && item.n !== "APP COMPLETA - 15 niveles") {
                     openGame(item);
                 } else {
                     window.open(item.u, '_blank');
@@ -557,126 +496,86 @@
         }
 
         function openGame(game) {
-            if (game.n === "APP COMPLETA - 15 niveles") {
-                window.open(game.u, '_blank');
-                return;
-            }
-
-            const header = document.getElementById('mainHeader');
-            const sections = document.querySelectorAll('.tab-section');
-            const gameView = document.getElementById('sec-gameview');
-            const iframe = document.getElementById('gameIframe');
-            const title = document.getElementById('gameViewTitle');
-
-            header.classList.add('hidden');
-            sections.forEach(s => s.classList.add('hidden'));
-            
-            gameView.classList.remove('hidden');
-            iframe.src = game.u;
-            title.innerText = game.n;
-            
+            document.getElementById('mainHeader').classList.add('hidden');
+            document.querySelectorAll('.tab-section').forEach(s => s.classList.add('hidden'));
+            document.getElementById('sec-gameview').classList.remove('hidden');
+            document.getElementById('gameIframe').src = game.u;
+            document.getElementById('gameViewTitle').innerText = game.n;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function closeGame() {
-            const header = document.getElementById('mainHeader');
-            const gameView = document.getElementById('sec-gameview');
-            const iframe = document.getElementById('gameIframe');
-            
-            iframe.src = "";
-            gameView.classList.add('hidden');
-            header.classList.remove('hidden');
-            
+            document.getElementById('gameIframe').src = "";
+            document.getElementById('sec-gameview').classList.add('hidden');
+            document.getElementById('mainHeader').classList.remove('hidden');
             changeTab('juegos');
         }
 
-        function contactWhatsApp(type) {
-            if(!session) return;
-            let text = '';
-            
-            if(type === 'local') {
-                text = `Hola 👋, quiero activar mi cuenta Premium en MateKen2. Mi usuario es: ${session.name} y mi correo es: ${session.email}. Voy a pagar C$180 a través de Billetera Móvil al número 78079410.`;
-            } else if(type === 'international') {
-                text = `Hola 👋, quiero activar mi cuenta Premium en MateKen2 desde el extranjero. Mi usuario es: ${session.name} y mi correo es: ${session.email}. 
-
-Puedo pagar a través de:
-💳 Remitly
-💳 WorldRemit
-💳 Ria Money Transfer
-
-¿Cuál es el proceso? Gracias.`;
+        function shareGame(index, type) {
+            if(session.status !== 'premium') {
+                document.getElementById('premiumModal').classList.remove('hidden');
+                return;
             }
-            
-            const url = `https://wa.me/50578079410?text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
+            const game = juegos[index];
+            if(type === 'link') {
+                navigator.clipboard.writeText(game.u).then(() => alert("¡Enlace copiado al portapapeles! 🚀"));
+            } else {
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(game.u)}`;
+                document.getElementById('qrContainer').innerHTML = `<img src="${qrUrl}" class="w-48 h-48 rounded-2xl">`;
+                document.getElementById('qrModal').classList.remove('hidden');
+            }
+        }
+
+        function contactWhatsApp(type) {
+            let msg = `Hola 👋, quiero activar mi cuenta Premium en MateKen2.%0A%0A👤 Usuario: ${session.name}%0A📧 Correo: ${session.email}%0A💰 Método: ${type === 'local' ? 'Billetera Móvil (Nicaragua)' : 'Remesa Internacional'}.`;
+            window.open(`https://wa.me/50578079410?text=${msg}`, '_blank');
         }
 
         function changeTab(t) {
             document.querySelectorAll('.tab-section').forEach(s => s.classList.add('hidden'));
-            const targetSection = document.getElementById('sec-' + t);
-            if(targetSection) targetSection.classList.remove('hidden');
-            
+            document.getElementById('sec-' + t).classList.remove('hidden');
             document.querySelectorAll('.tab-btn').forEach(b => {
                 b.classList.remove('active');
                 b.classList.add('bg-white', 'text-gray-500', 'border-gray-100');
                 if(b.id === 'btn-premium') b.classList.add('text-premium', 'border-premium/20');
             });
-            
             const activeBtn = document.getElementById('btn-' + t);
             if(activeBtn) {
                 activeBtn.classList.add('active');
                 activeBtn.classList.remove('bg-white', 'text-gray-500', 'border-gray-100', 'text-premium', 'border-premium/20');
             }
-            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function askAdmin() {
-            const pass = prompt("🔐 Contraseña de Maestro:");
-            if(pass === "PRO2024") toggleAdmin();
+            if(prompt("🔐 Contraseña de Maestro:") === "PRO2024") toggleAdmin();
         }
 
         function toggleAdmin() {
-            const p = document.getElementById('adminPanel');
-            p.classList.toggle('hidden');
-            if(!p.classList.contains('hidden')) renderAdmin();
+            document.getElementById('adminPanel').classList.toggle('hidden');
+            if(!document.getElementById('adminPanel').classList.contains('hidden')) renderAdmin();
         }
 
         function renderAdmin() {
             const tbody = document.getElementById('userTable');
-            tbody.innerHTML = "";
-            
-            const totalUsers = db.length;
-            const premiumUsers = db.filter(u => u.status === 'premium').length;
-            
-            document.getElementById('totalUsersCount').innerText = totalUsers;
-            document.getElementById('premiumUsersCount').innerText = premiumUsers;
-            
-            db.forEach(u => {
-                const tr = document.createElement('tr');
-                tr.className = "hover:bg-gray-50/50 transition-colors";
-                const fechaRegistro = u.fecha_registro ? new Date(u.fecha_registro).toLocaleDateString('es-ES') : 'N/A';
-                tr.innerHTML = `
+            tbody.innerHTML = db.map(u => `
+                <tr class="hover:bg-gray-50/50 transition-colors">
                     <td class="p-6">
                         <p class="font-black text-dark uppercase text-sm">${u.name}</p>
                         <p class="text-[10px] text-gray-400 font-bold">${u.email}</p>
                     </td>
                     <td class="p-6">
-                        <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${u.status === 'premium' ? 'bg-premium/10 text-premium border border-premium/20' : 'bg-gray-100 text-gray-400 border border-gray-200'}">
+                        <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase ${u.status === 'premium' ? 'bg-premium/10 text-premium border border-premium/20' : 'bg-gray-100 text-gray-400 border border-gray-200'}">
                             ${u.status}
                         </span>
                     </td>
-                    <td class="p-6 text-sm text-gray-500">
-                        ${fechaRegistro}
-                    </td>
                     <td class="p-6 text-right">
-                        <button onclick="toggleUserStatus('${u.email}')" class="bg-azul/5 text-azul hover:bg-azul hover:text-white px-4 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all">
+                        <button onclick="toggleUserStatus('${u.email}')" class="bg-azul/5 text-azul hover:bg-azul hover:text-white px-4 py-2 rounded-xl font-black text-[10px] uppercase transition-all">
                             Cambiar Rango
                         </button>
                     </td>
-                `;
-                tbody.appendChild(tr);
-            });
+                </tr>
+            `).join('');
         }
 
         function toggleUserStatus(email) {
@@ -690,6 +589,7 @@ Puedo pagar a través de:
             if(session && session.email === email) {
                 session.status = (session.status === 'gratis' ? 'premium' : 'gratis');
                 localStorage.setItem('mate_session', JSON.stringify(session));
+                syncPremiumFlag();
                 updateUI();
             }
             renderAdmin();
@@ -697,84 +597,26 @@ Puedo pagar a través de:
             renderFichas();
         }
 
-        function renderFichas() {
-            const grid = document.getElementById('gridFichas');
-            grid.innerHTML = "";
-            fichas.forEach((f, index) => {
-                const card = document.createElement('div');
-                card.className = `ficha-card bg-white rounded-[2rem] p-6 border-2 border-gray-50 shadow-sm flex items-center gap-4 cursor-pointer relative overflow-hidden group`;
-                card.onclick = () => launch(f, index, 'ficha');
-                
-                card.innerHTML = `
-                    <div class="w-16 h-16 bg-gradient-to-br ${f.c} rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg group-hover:rotate-6 transition-transform">
-                        <i class="fas ${f.i}"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h4 class="font-black text-dark uppercase tracking-tight">${f.n}</h4>
-                        <p class="text-xs text-gray-400 font-bold">Documento PDF</p>
-                    </div>
-                    <div class="text-gray-300 group-hover:text-azul transition-colors">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
+        // --- PWA ---
         let deferredPrompt;
-        const installBtn = document.getElementById('installBtn');
-
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            installBtn.classList.remove('hidden');
+            document.getElementById('installBtn').classList.remove('hidden');
         });
 
-        installBtn.addEventListener('click', async () => {
-                   // Verificamos si el usuario es Premium con el nuevo sistema de localStorage
-        const esPremium = localStorage.getItem('usuario_premium') === 'true';
-
-        if (!esPremium) {
-            // Si NO es premium, le mostramos el modal de bloqueo
-            document.getElementById('premiumModal').classList.remove('hidden');
-            return;
-        }
-
-            
+        document.getElementById('installBtn').addEventListener('click', async () => {
+            if (localStorage.getItem('usuario_premium') !== 'true') {
+                document.getElementById('premiumModal').classList.remove('hidden');
+                return;
+            }
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    installBtn.classList.add('hidden');
-                }
+                if (outcome === 'accepted') document.getElementById('installBtn').classList.add('hidden');
                 deferredPrompt = null;
             }
         });
-
-    function verificarEstadoPremium() {
-        const esPremium = localStorage.getItem('usuario_premium') === 'true';
-        const tagEstado = document.getElementById('userStatusTag');
-        
-        if (tagEstado) {
-            if (esPremium) {
-                tagEstado.innerText = "PREMIUM 🚀";
-                tagEstado.className = "text-[10px] font-bold text-purple-600 uppercase";
-            } else {
-                tagEstado.innerText = "GRATIS";
-                tagEstado.className = "text-[10px] font-bold text-gray-400 uppercase";
-            }
-        }
-    }
-
-    setTimeout(verificarEstadoPremium, 500);
-
-    function activarPremiumManual() {
-    localStorage.setItem('usuario_premium', 'true');
-    alert("¡Usuario activado como Premium con éxito! Recargando MateKen2...");
-    location.reload();
-}
-</script> 
-
-
+    </script>
 </body>
 </html>
