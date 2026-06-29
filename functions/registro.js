@@ -1,22 +1,20 @@
 export async function onRequestPost(context) {
   try {
-    // 1. Recibe los datos enviados desde tu formulario web
-    const { nombre, email } = await context.request.json();
+    // Lee lo que el usuario escribe en tu formulario web
+    const { nombre, correo } = await context.request.json();
 
-    // 2. Valida que no estén vacíos
-    if (!nombre || !email) {
+    if (!nombre || !correo) {
       return new Response("Faltan campos obligatorios", { status: 400 });
     }
 
-    // 3. Los guarda en la tabla 'usuarios' usando la vinculación 'DB' que hiciste en Cloudflare
+    // Guarda los datos usando los nombres exactos de tus columnas
     await context.env.DB.prepare(
-      "INSERT INTO usuarios (nombre, email) VALUES (?, ?)"
+      "INSERT INTO usuarios (nombre, correo) VALUES (?, ?)"
     )
-    .bind(nombre, email)
+    .bind(nombre, correo)
     .run();
 
-    // 4. Responde a la web que todo salió bien
-    return new Response(JSON.stringify({ success: true, message: "Usuario registrado con éxito" }), {
+    return new Response(JSON.stringify({ success: true, message: "Guardado en Cloudflare D1" }), {
       headers: { "Content-Type": "application/json" },
     });
 
