@@ -60,12 +60,12 @@
 
         /* Floating Button Style */
         .float-app-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 1000;
-            animation: float 3s ease-in-out infinite;
-        }
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* Cambiado a la izquierda para que no choque con el derecho */
+    z-index: 1000;
+    animation: float 3s ease-in-out infinite;
+}
     </style>
 </head>
 <body class="pb-24">
@@ -104,7 +104,7 @@
     </div>
 
     <!-- 2. HEADER & NAV -->
-    <header id="mainHeader" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 border-b border-gray-100 shadow-sm">
+    <header id="mainHeader" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 px-4 sm:px-6 py-4 border-b border-gray-100 shadow-sm">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3 group cursor-pointer" onclick="changeTab('inicio')">
                 <div class="bg-azul text-white w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-lg group-hover:rotate-12 transition-transform">
@@ -113,8 +113,8 @@
                 <h1 class="text-2xl font-black text-dark tracking-tighter">Mate<span class="text-azul">Ken2</span></h1>
             </div>
             
-            <!-- CORRECCIÓN: Se cambió ondblclick por un contador de clics táctil -->
-            <div id="profileBtn" onclick="handleAdminTaps()" class="flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-2xl border border-gray-200 cursor-pointer hover:border-azul hover:bg-white transition-all group">
+            <!-- Cambiado a 3 clics para compatibilidad móvil -->
+            <div id="profileBtn" class="flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-2xl border border-gray-200 cursor-pointer hover:border-azul hover:bg-white transition-all group" onclick="checkAdminAccess()">
                 <div class="text-right hidden sm:block">
                     <p id="navUserName" class="font-black text-dark text-sm leading-none">Cargando...</p>
                     <p id="userStatusTag" class="text-[10px] font-bold text-gray-400 uppercase">Gratis</p>
@@ -138,6 +138,7 @@
         
         <!-- SECCIÓN: INICIO -->
         <section id="sec-inicio" class="tab-section space-y-8">
+            <!-- Hero Banner -->
             <div class="vibrant-gradient rounded-[3rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center gap-8">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
                 <div class="absolute bottom-0 left-0 w-48 h-48 bg-premium/20 rounded-full -ml-10 -mb-10 blur-2xl"></div>
@@ -158,6 +159,7 @@
                 </div>
             </div>
 
+            <!-- Bienvenidos Iframe -->
             <div class="bg-white p-2 rounded-[2.5rem] shadow-xl border border-gray-100 h-[600px]">
                 <iframe src="https://fonklexdy-cell.github.io/BIENVENIDOS/" class="w-full h-full rounded-[2rem]"></iframe>
             </div>
@@ -177,6 +179,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6" id="gridJuegos">
+                <!-- Juegos se cargan dinámicamente -->
             </div>
         </section>
 
@@ -193,6 +196,8 @@
             </div>
             <div class="flex-1 relative">
                 <iframe id="gameIframe" src="" class="w-full h-full"></iframe>
+                
+                <!-- Botón Flotante (App Completa) -->
                 <a href="https://drive.google.com/file/d/1cY7sU-FZMbmWKmAnoRq1uza2AOTPH0q7/view?usp=drive_link" target="_blank" class="float-app-btn bg-dark text-amarillo w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-2xl border-4 border-amarillo/30 hover:scale-110 transition-transform group">
                     <i class="fas fa-crown group-hover:rotate-12"></i>
                     <span class="absolute right-full mr-4 bg-dark text-white text-[10px] font-black py-2 px-4 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none uppercase tracking-widest">Bienvenidos</span>
@@ -209,7 +214,9 @@
                     <p class="text-lg opacity-90 max-w-2xl">Fortalece tus habilidades con nuestras fichas educativas. Ejercicios variados de operaciones fundamentales diseñados para tu éxito.</p>
                 </div>
             </div>
+
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gridFichas">
+                <!-- Fichas se cargan dinámicamente -->
             </div>
         </section>
 
@@ -229,25 +236,46 @@
                         <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">Desbloquea el potencial ilimitado de MateKen2 y accede a todo nuestro contenido exclusivo.</p>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto mb-10">
-                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4"><i class="fas fa-check-circle text-verde text-xl"></i><span class="font-bold">Acceso a todos los juegos</span></div>
-                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4"><i class="fas fa-check-circle text-verde text-xl"></i><span class="font-bold">Todas las fichas educativas</span></div>
-                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4"><i class="fas fa-check-circle text-verde text-xl"></i><span class="font-bold">Contenido exclusivo</span></div>
-                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4"><i class="fas fa-check-circle text-verde text-xl"></i><span class="font-bold">Compartir juegos</span></div>
-                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4"><i class="fas fa-check-circle text-verde text-xl"></i><span class="font-bold">Actualizaciones futuras</span></div>
-                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4"><i class="fas fa-check-circle text-verde text-xl"></i><span class="font-bold">Paga desde Nicaragua </span></div>
+                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4">
+                                <i class="fas fa-check-circle text-verde text-xl"></i>
+                                <span class="font-bold">Acceso a todos los juegos</span>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4">
+                                <i class="fas fa-check-circle text-verde text-xl"></i>
+                                <span class="font-bold">Todas las fichas educativas</span>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4">
+                                <i class="fas fa-check-circle text-verde text-xl"></i>
+                                <span class="font-bold">Contenido exclusivo</span>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4">
+                                <i class="fas fa-check-circle text-verde text-xl"></i>
+                                <span class="font-bold">Compartir juegos</span>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4">
+                                <i class="fas fa-check-circle text-verde text-xl"></i>
+                                <span class="font-bold">Actualizaciones futuras</span>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl flex items-center gap-4">
+                                <i class="fas fa-check-circle text-verde text-xl"></i>
+                                <span class="font-bold">Paga desde Nicaragua </span>
+                            </div>
                         </div>
 
                         <div class="bg-white text-dark p-8 rounded-[2.5rem] shadow-xl inline-block w-full max-w-md">
                             <p class="text-gray-400 font-black uppercase text-xs tracking-widest mb-2">Inversión Única</p>
                             <h3 class="text-5xl font-black text-azul mb-6">C$180</h3>
+                            
                             <div class="space-y-4 mb-8">
                                 <div class="bg-gray-50 p-4 rounded-2xl flex items-center justify-between">
                                     <span class="text-gray-500 font-bold">Billetera Móvil</span>
                                     <span class="text-azul font-black text-lg">78079410</span>
                                 </div>
                             </div>
+                            
                             <button onclick="contactWhatsApp()" class="w-full premium-gradient text-white font-black py-5 rounded-2xl text-xl shadow-xl uppercase tracking-widest hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
-                                <i class="fab fa-whatsapp text-2xl"></i> Activar Premium
+                                <i class="fab fa-whatsapp text-2xl"></i>
+                                Activar Premium
                             </button>
                         </div>
                     </div>
@@ -256,16 +284,20 @@
         </section>
     </main>
 
-    <!-- MODAL QR, PREMIUM Y ADMIN (IGUALES) -->
+    <!-- MODAL QR -->
     <div id="qrModal" class="fixed inset-0 z-[250] hidden flex items-center justify-center bg-dark/90 backdrop-blur-lg p-6 text-center">
         <div class="bg-white rounded-[3rem] p-8 max-w-sm w-full shadow-2xl relative">
             <button onclick="document.getElementById('qrModal').classList.add('hidden')" class="absolute top-6 right-6 text-gray-300 hover:text-gray-500"><i class="fas fa-times text-xl"></i></button>
             <h3 class="text-2xl font-black text-dark mb-2">Escanea el Juego</h3>
-            <div id="qrContainer" class="bg-gray-50 p-4 rounded-3xl mb-6 flex justify-center"></div>
+            <p class="text-gray-400 font-bold text-xs mb-6 uppercase">MateKen2 QR Share</p>
+            <div id="qrContainer" class="bg-gray-50 p-4 rounded-3xl mb-6 flex justify-center">
+                <!-- QR Image will be here -->
+            </div>
             <button onclick="document.getElementById('qrModal').classList.add('hidden')" class="w-full bg-azul text-white font-black py-4 rounded-2xl uppercase tracking-widest">Cerrar</button>
         </div>
     </div>
 
+    <!-- MODAL BLOQUEO PREMIUM -->
     <div id="premiumModal" class="fixed inset-0 z-[200] hidden flex items-center justify-center bg-dark/90 backdrop-blur-lg p-6 text-center">
         <div class="bg-white rounded-[3rem] p-10 max-w-sm w-full shadow-2xl border-t-8 border-premium relative overflow-hidden">
             <div class="absolute top-0 right-0 p-4">
@@ -274,6 +306,7 @@
             <div class="text-7xl mb-6 animate-bounce">⭐</div>
             <h3 class="text-3xl font-black text-dark mb-4 tracking-tighter uppercase">¡Contenido Premium!</h3>
             <p class="text-gray-500 font-bold mb-8 leading-relaxed">Has descubierto un tesoro exclusivo. Activa tu cuenta Premium para acceder sin límites a este y todos los recursos.</p>
+            
             <div class="space-y-3">
                 <button onclick="changeTab('premium'); document.getElementById('premiumModal').classList.add('hidden')" class="w-full premium-gradient text-white font-black py-5 rounded-2xl text-lg shadow-xl uppercase tracking-widest hover:scale-[1.02] transition-transform">Ver Beneficios</button>
                 <button onclick="document.getElementById('premiumModal').classList.add('hidden')" class="w-full bg-gray-100 text-gray-400 font-black py-4 rounded-2xl text-sm uppercase tracking-widest hover:bg-gray-200 transition-colors">Quizás más tarde</button>
@@ -281,26 +314,34 @@
         </div>
     </div>
 
-    <div id="adminPanel" class="fixed inset-0 z-[300] hidden bg-gray-100/50 backdrop-blur-xl p-4 sm:p-10 overflow-y-auto">
-        <div class="max-w-4xl mx-auto bg-white rounded-[3rem] p-8 sm:p-12 shadow-2xl border-4 border-azul relative">
-            <div class="flex justify-between items-center mb-10">
-                <div class="flex items-center gap-4">
-                    <div class="bg-azul text-white w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow-lg"><i class="fas fa-user-shield"></i></div>
-                    <h2 class="text-3xl font-black text-dark uppercase tracking-tighter">Panel Maestro 🤖</h2>
+    <!-- PANEL ADMIN MEJORADO PARA MÓVIL -->
+    <div id="adminPanel" class="fixed inset-0 z-[300] hidden bg-gray-100/50 backdrop-blur-xl p-2 sm:p-10 overflow-y-auto">
+        <div class="max-w-4xl mx-auto bg-white rounded-[2rem] sm:rounded-[3rem] p-4 sm:p-12 shadow-2xl border-2 sm:border-4 border-azul relative">
+            <div class="flex justify-between items-center mb-6 sm:mb-10">
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <div class="bg-azul text-white w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center text-xl sm:text-2xl shadow-lg">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h2 class="text-xl sm:text-3xl font-black text-dark uppercase tracking-tighter">Panel Maestro 🤖</h2>
                 </div>
-                <button onclick="toggleAdmin()" class="bg-red-50 text-red-500 w-12 h-12 rounded-2xl flex items-center justify-center text-xl hover:bg-red-500 hover:text-white transition-all shadow-md"><i class="fas fa-times"></i></button>
+                <button onclick="toggleAdmin()" class="bg-red-50 text-red-500 w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center text-lg sm:text-xl hover:bg-red-500 hover:text-white transition-all shadow-md">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="bg-gray-50 rounded-3xl overflow-hidden border border-gray-100">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
+            
+            <div class="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
+                <div class="overflow-x-auto w-full">
+                    <table class="w-full text-left min-w-[300px]">
                         <thead>
                             <tr class="bg-gray-100 text-gray-400 text-[10px] font-black uppercase tracking-widest">
-                                <th class="p-6">Estudiante</th>
-                                <th class="p-6">Estado</th>
-                                <th class="p-6 text-right">Gestión</th>
+                                <th class="p-3 sm:p-6">Estudiante</th>
+                                <th class="p-3 sm:p-6">Estado</th>
+                                <th class="p-3 sm:p-6 text-right">Gestión</th>
                             </tr>
                         </thead>
-                        <tbody id="userTable" class="divide-y divide-gray-100"></tbody>
+                        <tbody id="userTable" class="divide-y divide-gray-100">
+                            <!-- Usuarios se cargan aquí -->
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -311,21 +352,7 @@
         let db = JSON.parse(localStorage.getItem('mate_db')) || [];
         let session = JSON.parse(localStorage.getItem('mate_session')) || null;
         let timerId;
-        
-        // CORRECCIÓN ADICIONAL: Contador de toques para móvil
-        let tapCount = 0;
-        let tapTimeout;
-
-        function handleAdminTaps() {
-            tapCount++;
-            clearTimeout(tapTimeout);
-            if (tapCount >= 3) {
-                tapCount = 0;
-                askAdmin();
-            } else {
-                tapTimeout = setTimeout(() => { tapCount = 0; }, 500);
-            }
-        }
+        let clickCount = 0; // Para acceso móvil
 
         const juegos = [
             { n: "Domino-Tablas", u: "https://fonklexdy-cell.github.io/Domino-tablas/", i: "fa-dice-six", c: "bg-red-500" },
@@ -408,6 +435,7 @@
             document.getElementById('navUserName').innerText = session.name;
             document.getElementById('helloName').innerText = session.name;
             document.getElementById('userStatusTag').innerText = session.status;
+            
             const badge = document.getElementById('premiumBadge');
             if(session.status === 'premium') {
                 badge.classList.remove('hidden');
@@ -424,14 +452,22 @@
             juegos.forEach((j, index) => {
                 const card = document.createElement('div');
                 card.className = `game-card h-48 rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center shadow-lg border-4 border-white ${j.c} relative group`;
+                
                 card.innerHTML = `
                     <div onclick="launch(juegos[${index}], ${index}, 'juego')" class="flex flex-col items-center">
-                        <div class="text-5xl mb-3 text-white drop-shadow-md group-hover:scale-110 transition-transform"><i class="fas ${j.i}"></i></div>
+                        <div class="text-5xl mb-3 text-white drop-shadow-md group-hover:scale-110 transition-transform">
+                            <i class="fas ${j.i}"></i>
+                        </div>
                         <span class="text-white font-black text-sm uppercase tracking-tighter leading-tight drop-shadow-sm">${j.n}</span>
                     </div>
+                    
                     <div class="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onclick="shareGame(${index}, 'link')" class="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full text-white text-xs flex items-center justify-center hover:bg-white hover:text-dark transition-all"><i class="fas fa-link"></i></button>
-                        <button onclick="shareGame(${index}, 'qr')" class="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full text-white text-xs flex items-center justify-center hover:bg-white hover:text-dark transition-all"><i class="fas fa-qrcode"></i></button>
+                        <button onclick="shareGame(${index}, 'link')" class="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full text-white text-xs flex items-center justify-center hover:bg-white hover:text-dark transition-all">
+                            <i class="fas fa-link"></i>
+                        </button>
+                        <button onclick="shareGame(${index}, 'qr')" class="w-8 h-8 bg-white/20 backdrop-blur-md rounded-full text-white text-xs flex items-center justify-center hover:bg-white hover:text-dark transition-all">
+                            <i class="fas fa-qrcode"></i>
+                        </button>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -443,9 +479,12 @@
                 document.getElementById('premiumModal').classList.remove('hidden');
                 return;
             }
+
             const game = juegos[index];
             if(type === 'link') {
-                navigator.clipboard.writeText(game.u).then(() => { alert("¡Enlace copiado al portapapeles! 🚀"); });
+                navigator.clipboard.writeText(game.u).then(() => {
+                    alert("¡Enlace copiado al portapapeles! 🚀");
+                });
             } else {
                 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(game.u)}`;
                 document.getElementById('qrContainer').innerHTML = `<img src="${qrUrl}" class="w-48 h-48 rounded-2xl shadow-inner">`;
@@ -455,17 +494,22 @@
 
         function launch(item, index, type) {
             const isRestricted = (type === 'juego' && index >= 4) || (type === 'ficha' && index >= 1);
+            
             if(isRestricted && session.status === 'gratis') {
                 const win = window.open(item.u, '_blank');
                 const bar = document.getElementById('timerBar');
                 const progress = document.getElementById('timerProgress');
+                
                 bar.style.display = 'block';
                 progress.style.width = '100%';
+                
                 let timeLeft = 8;
                 clearInterval(timerId);
+                
                 timerId = setInterval(() => {
                     timeLeft--;
                     progress.style.width = (timeLeft * 16.66) + '%';
+                    
                     if(timeLeft <= 0) {
                         clearInterval(timerId);
                         bar.style.display = 'none';
@@ -474,35 +518,48 @@
                     }
                 }, 1000);
             } else {
-                if(type === 'juego') { openGame(item); } else { window.open(item.u, '_blank'); }
+                if(type === 'juego') {
+                    openGame(item);
+                } else {
+                    window.open(item.u, '_blank');
+                }
             }
         }
 
         function openGame(game) {
-            if (game.n === "APP COMPLETA - 15 niveles") {
-                window.open(game.u, '_blank');
-                return;
-            }
-            const header = document.getElementById('mainHeader');
-            const sections = document.querySelectorAll('.tab-section');
-            const gameView = document.getElementById('sec-gameview');
-            const iframe = document.getElementById('gameIframe');
-            const title = document.getElementById('gameViewTitle');
-            header.classList.add('hidden');
-            sections.forEach(s => s.classList.add('hidden'));
-            gameView.classList.remove('hidden');
-            iframe.src = game.u;
-            title.innerText = game.n;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    // 1. Detectar si es el juego que da problemas
+    if (game.n === "APP COMPLETA - 15 niveles") {
+        window.open(game.u, '_blank');
+        return; // Salimos de la función para no intentar cargar el iframe
+    }
+
+    // 2. Comportamiento normal para los demás juegos
+    const header = document.getElementById('mainHeader');
+    const sections = document.querySelectorAll('.tab-section');
+    const gameView = document.getElementById('sec-gameview');
+    const iframe = document.getElementById('gameIframe');
+    const title = document.getElementById('gameViewTitle');
+
+    header.classList.add('hidden');
+    sections.forEach(s => s.classList.add('hidden'));
+    
+    gameView.classList.remove('hidden');
+    iframe.src = game.u;
+    title.innerText = game.n;
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
         function closeGame() {
             const header = document.getElementById('mainHeader');
             const gameView = document.getElementById('sec-gameview');
             const iframe = document.getElementById('gameIframe');
+            
             iframe.src = "";
             gameView.classList.add('hidden');
             header.classList.remove('hidden');
+            
+            // Volver a la pestaña de juegos
             changeTab('juegos');
         }
 
@@ -520,17 +577,31 @@
                 b.classList.add('bg-white', 'text-gray-500', 'border-gray-100');
                 if(b.id === 'btn-premium') b.classList.add('text-premium', 'border-premium/20');
             });
+            
             const activeBtn = document.getElementById('btn-' + t);
             if(activeBtn) {
                 activeBtn.classList.add('active');
                 activeBtn.classList.remove('bg-white', 'text-gray-500', 'border-gray-100', 'text-premium', 'border-premium/20');
             }
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // NUEVA LOGICA PARA MÓVIL: 3 CLICS RÁPIDOS
+        function checkAdminAccess() {
+            clickCount++;
+            if (clickCount === 3) {
+                askAdmin();
+                clickCount = 0;
+            }
+            // Reiniciar contador si no se hace rápido
+            setTimeout(() => { clickCount = 0; }, 1000);
         }
 
         function askAdmin() {
             const pass = prompt("🔐 Contraseña de Maestro:");
             if(pass === "PRO2024") toggleAdmin();
+            clickCount = 0; // Resetear contador al terminar
         }
 
         function toggleAdmin() {
@@ -542,19 +613,29 @@
         function renderAdmin() {
             const tbody = document.getElementById('userTable');
             tbody.innerHTML = "";
+            
+            if(db.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-gray-400 font-bold">No hay alumnos registrados aún.</td></tr>`;
+                return;
+            }
+
             db.forEach(u => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-gray-50/50 transition-colors";
                 tr.innerHTML = `
-                    <td class="p-6">
-                        <p class="font-black text-dark uppercase text-sm">${u.name}</p>
-                        <p class="text-[10px] text-gray-400 font-bold">${u.email}</p>
+                    <td class="p-3 sm:p-6">
+                        <p class="font-black text-dark uppercase text-[10px] sm:text-sm truncate max-w-[100px] sm:max-w-none">${u.name}</p>
+                        <p class="text-[8px] sm:text-[10px] text-gray-400 font-bold truncate max-w-[100px] sm:max-w-none">${u.email}</p>
                     </td>
-                    <td class="p-6">
-                        <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${u.status === 'premium' ? 'bg-premium/10 text-premium border border-premium/20' : 'bg-gray-100 text-gray-400 border border-gray-200'}">${u.status}</span>
+                    <td class="p-3 sm:p-6">
+                        <span class="px-2 py-1 sm:px-4 sm:py-1.5 rounded-full text-[8px] sm:text-[10px] font-black uppercase tracking-widest ${u.status === 'premium' ? 'bg-premium/10 text-premium border border-premium/20' : 'bg-gray-100 text-gray-400 border border-gray-200'}">
+                            ${u.status}
+                        </span>
                     </td>
-                    <td class="p-6 text-right">
-                        <button onclick="toggleUserStatus('${u.email}')" class="bg-azul/5 text-azul hover:bg-azul hover:text-white px-4 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all">Cambiar Rango</button>
+                    <td class="p-3 sm:p-6 text-right">
+                        <button onclick="toggleUserStatus('${u.email}')" class="bg-azul/5 text-azul hover:bg-azul hover:text-white px-2 py-2 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl font-black text-[8px] sm:text-[10px] uppercase tracking-widest transition-all">
+                            PRO
+                        </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -584,34 +665,45 @@
                 const card = document.createElement('div');
                 card.className = `ficha-card bg-white rounded-[2rem] p-6 border-2 border-gray-50 shadow-sm flex items-center gap-4 cursor-pointer relative overflow-hidden group`;
                 card.onclick = () => launch(f, index, 'ficha');
+                
                 card.innerHTML = `
-                    <div class="w-16 h-16 bg-gradient-to-br ${f.c} rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg group-hover:rotate-6 transition-transform"><i class="fas ${f.i}"></i></div>
+                    <div class="w-16 h-16 bg-gradient-to-br ${f.c} rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg group-hover:rotate-6 transition-transform">
+                        <i class="fas ${f.i}"></i>
+                    </div>
                     <div class="flex-1">
                         <h4 class="font-black text-dark uppercase tracking-tight">${f.n}</h4>
                         <p class="text-xs text-gray-400 font-bold">Documento PDF</p>
                     </div>
-                    <div class="text-gray-300 group-hover:text-azul transition-colors"><i class="fas fa-chevron-right"></i></div>
+                    <div class="text-gray-300 group-hover:text-azul transition-colors">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
+        // PWA INSTALL LOGIC
         let deferredPrompt;
         const installBtn = document.getElementById('installBtn');
+
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
             installBtn.classList.remove('hidden');
         });
+
         installBtn.addEventListener('click', async () => {
             if(session.status !== 'premium') {
                 document.getElementById('premiumModal').classList.remove('hidden');
                 return;
             }
+            
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') { installBtn.classList.add('hidden'); }
+                if (outcome === 'accepted') {
+                    installBtn.classList.add('hidden');
+                }
                 deferredPrompt = null;
             }
         });
