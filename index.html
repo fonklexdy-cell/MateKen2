@@ -832,94 +832,64 @@
             if(pass === "PRO2024") toggleAdmin();
         }
 
-               function toggleAdmin() {
+        function toggleAdmin() {
             const p = document.getElementById('adminPanel');
             p.classList.toggle('hidden');
             if(!p.classList.contains('hidden')) renderAdmin();
         }
 
-        async function renderAdmin() {
+        function renderAdmin() {
             const tbody = document.getElementById('userTable');
             tbody.innerHTML = "";
-            try {
-                const urlSupabase = `https://supabase.co*`;
-                const respuesta = await fetch(urlSupabase, {
-                    method: 'GET',
-                    headers: {
-                        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRnbW9pY2ZsYXFidm1qZHFxenhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5ODU2OTIsImV4cCI6MjAzMDU2MTY5Mn0.TRfYfJWmOXBnjo03JBux7DJoqYoiah_b1d7TMVmHfCQ',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRnbW9pY2ZsYXFidm1qZHFxenhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5ODU2OTIsImV4cCI6MjAzMDU2MTY5Mn0.TRfYfJWmOXBnjo03JBux7DJoqYoiah_b1d7TMVmHfCQ'
-                    }
-                });
-                const listaUsuarios = respuesta.ok ? await respuesta.json() : [];
-                
-                document.getElementById('totalUsersCount').innerText = listaUsuarios.length;
-                document.getElementById('premiumUsersCount').innerText = listaUsuarios.filter(u => u.es_premium === true).length;
-                
-                listaUsuarios.forEach(u => {
-                    const tr = document.createElement('tr');
-                    tr.className = "hover:bg-gray-50/50 transition-colors";
-                    const fecha = u.created_at ? new Date(u.created_at).toLocaleDateString('es-ES') : 'N/A';
-                    const nombreMostrar = u.email ? u.email.split('@')[0].toUpperCase() : 'USUARIO';
-                    const statusVisual = u.es_premium ? 'premium' : 'gratis';
-                    
-                    tr.innerHTML = `
-                        <td class="p-6">
-                            <p class="font-black text-dark uppercase text-sm">${nombreMostrar}</p>
-                            <p class="text-[10px] text-gray-400 font-bold">${u.email}</p>
-                        </td>
-                        <td class="p-6">
-                            <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${statusVisual === 'premium' ? 'bg-premium/10 text-premium border border-premium/20' : 'bg-gray-100 text-gray-400 border border-gray-200'}">
-                                ${statusVisual}
-                            </span>
-                        </td>
-                        <td class="p-6 text-sm text-gray-500">${fecha}</td>
-                        <td class="p-6 text-right">
-                            <button onclick="toggleUserStatus('${u.email}', ${u.es_premium})" class="bg-azul/5 text-azul hover:bg-azul hover:text-white px-4 py-2 rounded-xl font-black text-[10px] uppercase transition-all">
-                                Cambiar Rango
-                            </button>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            } catch (error) {
-                console.error("Error cargando administración:", error);
-            }
+            
+            document.getElementById('totalUsersCount').innerText = db.length;
+            document.getElementById('premiumUsersCount').innerText = db.filter(u => u.status === 'premium').length;
+            
+            db.forEach(u => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-gray-50/50 transition-colors";
+                const fecha = u.fecha_registro ? new Date(u.fecha_registro).toLocaleDateString('es-ES') : 'N/A';
+                tr.innerHTML = `
+                    <td class="p-6">
+                        <p class="font-black text-dark uppercase text-sm">${u.name}</p>
+                        <p class="text-[10px] text-gray-400 font-bold">${u.email}</p>
+                    </td>
+                    <td class="p-6">
+                        <span class="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${u.status === 'premium' ? 'bg-premium/10 text-premium border border-premium/20' : 'bg-gray-100 text-gray-400 border border-gray-200'}">
+                            ${u.status}
+                        </span>
+                    </td>
+                    <td class="p-6 text-sm text-gray-500">${fecha}</td>
+                    <td class="p-6 text-right">
+                        <button onclick="toggleUserStatus('${u.email}')" class="bg-azul/5 text-azul hover:bg-azul hover:text-white px-4 py-2 rounded-xl font-black text-[10px] uppercase transition-all">
+                            Cambiar Rango
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
         }
 
-        async function toggleUserStatus(email, esPremiumActual) {
-            try {
-                const nuevoEstadoPremium = !esPremiumActual;
-                
-                // 1. Enviamos el cambio directo a Supabase (Actualiza la nube)
-                const urlSupabase = `https://supabase.co{email}`;
-                await fetch(urlSupabase, {
-                    method: 'PATCH',
-                    headers: {
-                        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRnbW9pY2ZsYXFidm1qZHFxenhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5ODU2OTIsImV4cCI6MjAzMDU2MTY5Mn0.TRfYfJWmOXBnjo03JBux7DJoqYoiah_b1d7TMVmHfCQ',
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRnbW9pY2ZsYXFidm1qZHFxenhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ5ODU2OTIsImV4cCI6MjAzMDU2MTY5Mn0.TRfYfJWmOXBnjo03JBux7DJoqYoiah_b1d7TMVmHfCQ',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ es_premium: nuevoEstadoPremium })
-                });
-
-                // 2. Si es la sesión del propio celular abierto, actualizamos su interfaz local
-                if (session && session.email === email) {
-                    session.status = (nuevoEstadoPremium ? 'premium' : 'gratis');
-                    localStorage.setItem('mate_session', JSON.stringify(session));
-                    localStorage.setItem('usuario_premium', nuevoEstadoPremium ? 'true' : 'false');
-                    updateUI();
-                    renderJuegos();
-                    renderAppGame();
-                    renderFichas();
+        function toggleUserStatus(email) {
+            db = db.map(u => {
+                if(u.email === email) {
+                    u.status = (u.status === 'gratis' ? 'premium' : 'gratis');
                 }
-                
-                // Recargamos el panel maestro con los datos nuevos de la nube
-                renderAdmin();
-            } catch (error) {
-                console.error("Error al cambiar rango:", error);
+                return u;
+            });
+            localStorage.setItem('mate_db', JSON.stringify(db));
+            
+            if(session && session.email === email) {
+                session.status = (session.status === 'gratis' ? 'premium' : 'gratis');
+                localStorage.setItem('mate_session', JSON.stringify(session));
+                localStorage.setItem('usuario_premium', (session.status === 'premium' ? 'true' : 'false'));
+                updateUI();
+                renderJuegos();
+                renderAppGame();
+                renderFichas();
             }
+            renderAdmin();
         }
-
 
         // --- PWA INSTALACIÓN ---
         let deferredPrompt;
@@ -930,16 +900,9 @@
             deferredPrompt = e;
             installBtn.classList.remove('hidden');
         });
-        
-       installBtn.addEventListener('click', async () => {
-        if (window.supabase && session && session.user) {
-        const premiumReal = await verificarUsuarioPremium(session.user.id);
-        localStorage.setItem('usuario_premium', premiumReal ? 'true' : 'false');
-    }
 
-
-    const esPrem = localStorage.getItem('usuario_premium') === 'true' || (session && session.status === 'premium');
-
+        installBtn.addEventListener('click', async () => {
+            const esPrem = localStorage.getItem('usuario_premium') === 'true' || (session && session.status === 'premium');
 
             if (!esPrem) {
                 document.getElementById('premiumModal').classList.remove('hidden');
@@ -953,9 +916,7 @@
                 deferredPrompt = null;
             }
         });
-        
-    </script> 
-    <script src="control-premium.js"></script>
 
+    </script> 
 </body>
 </html>
