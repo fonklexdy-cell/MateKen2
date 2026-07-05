@@ -16,7 +16,7 @@ async function verificarUsuarioPremium(usuarioId) {
         const datos = await respuesta.json();
         
         // Retorna el valor directamente de la lista
-        return datos.length > 0 ? datos[0].es_premium : false;
+                return datos.length > 0 ? datos.es_premium : false;
 
     } catch (error) {
         // ESCUDO DE PROTECCIÓN: Si Supabase falla, la app no se cae.
