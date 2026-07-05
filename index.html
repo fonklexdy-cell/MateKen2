@@ -900,9 +900,13 @@
             deferredPrompt = e;
             installBtn.classList.remove('hidden');
         });
+        
+       installBtn.addEventListener('click', async () => {
+    const premiumReal = await verificarUsuarioPremium("991a5b5f-5327-4333-843e-4717472ec0be");
+    localStorage.setItem('usuario_premium', premiumReal ? 'true' : 'false');
 
-        installBtn.addEventListener('click', async () => {
-            const esPrem = localStorage.getItem('usuario_premium') === 'true' || (session && session.status === 'premium');
+    const esPrem = localStorage.getItem('usuario_premium') === 'true' || (session && session.status === 'premium');
+
 
             if (!esPrem) {
                 document.getElementById('premiumModal').classList.remove('hidden');
@@ -916,7 +920,9 @@
                 deferredPrompt = null;
             }
         });
-
+        
     </script> 
+    <script src="control-premium.js"></script>
+
 </body>
 </html>
