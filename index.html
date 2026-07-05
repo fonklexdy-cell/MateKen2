@@ -902,8 +902,11 @@
         });
         
        installBtn.addEventListener('click', async () => {
-    const premiumReal = await verificarUsuarioPremium("991a5b5f-5327-4333-843e-4717472ec0be");
-    localStorage.setItem('usuario_premium', premiumReal ? 'true' : 'false');
+        if (window.supabase && session && session.user) {
+        const premiumReal = await verificarUsuarioPremium(session.user.id);
+        localStorage.setItem('usuario_premium', premiumReal ? 'true' : 'false');
+    }
+
 
     const esPrem = localStorage.getItem('usuario_premium') === 'true' || (session && session.status === 'premium');
 
